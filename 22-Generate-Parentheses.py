@@ -4,7 +4,7 @@ class Solution:
         arr = []
         def backtrack(Open, Close):
             if Open == Close == n:
-                arr.append(\\.join(stack))
+                arr.append("".join(stack))
             if Open < n:
                 stack.append('(')
                 backtrack(Open + 1, Close)
