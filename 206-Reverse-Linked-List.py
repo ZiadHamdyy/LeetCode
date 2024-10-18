@@ -9,7 +9,6 @@ class Solution:
         nextCur = None
         head = None
         while current:
-            print(current.val)
             nextCur = current.next
             current.next = head
             head = current
