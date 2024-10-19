@@ -3,7 +3,7 @@ class Solution:
         result, solution = [], []
 
         def backtrack(i: int):
-            if i >= len(nums):
+            if i == len(nums):
                 return result.append(solution[:])
             
             solution.append(nums[i])
