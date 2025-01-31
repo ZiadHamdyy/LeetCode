@@ -11,18 +11,22 @@ class Solution:
         if not head or not head.next:
             return
 
-        h = head
+        slow, fast = head, head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
 
-        while h and h.next and h.next.next:
-            ptr = h
-            while ptr.next and ptr.next.next:
-                ptr = ptr.next
-
-            last = ptr.next
-            ptr.next = None
-
-            last.next = h.next
-            h.next = last
-
-            h = last.next
+        prev, curr = None, slow.next
+        slow.next = None
+        while curr:
+            temp = curr.next
+            curr.next = prev
+            prev = curr
+            curr = temp
         
+        first, second = head, prev
+        while second:
+            temp1, temp2 = first.next, second.next
+            first.next = second
+            second.next = temp1
+            first, second = temp1, temp2
