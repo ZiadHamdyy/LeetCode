@@ -1,0 +1,44 @@
+class Solution:
+    def maxTargetNodes(self, edges1: List[List[int]], edges2: List[List[int]], k: int) -> List[int]:
+        n = len(edges1)
+        m = len(edges2)
+        adj1 = defaultdict(list)
+        adj2 = defaultdict(list)
+        dist1 = {}
+        dist2 = {}
+        for x, y in edges1:
+            adj1[x].append(y)
+            adj1[y].append(x)
+        for x, y in edges2:
+            adj2[x].append(y)
+            adj2[y].append(x)
+        ans = [0] * len(adj1)
+
+        def bfs(adj, distlist, k):
+            for i in adj:
+                cnt = 0
+                q = deque([(i,0)])
+                visited = set()
+                visited.add(i)
+                dist = 0
+                while q:
+                    curr, dist = q.popleft()
+                    if dist > k:
+                        break
+                    else:
+                        cnt += 1
+                    for j in adj[curr]:
+                        if j not in visited:
+                            visited.add(j)
+                            q.append((j,dist+1))
+                distlist[i] = cnt
+        bfs(adj1, dist1,k)
+        bfs(adj2, dist2, k-1)
+
+        maxDist2 = 0
+        for i in dist2:
+            if dist2[i] > maxDist2:
+                maxDist2 = dist2[i]
+        for i in dist1:
+            ans[i] = dist1[i]+maxDist2
+        return ans
