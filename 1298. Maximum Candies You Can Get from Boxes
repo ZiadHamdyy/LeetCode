@@ -1,0 +1,23 @@
+class Solution:
+    def maxCandies(self, status: List[int], candies: List[int], keys: List[List[int]], containedBoxes: List[List[int]], initialBoxes: List[int]) -> int:
+        q=deque(initialBoxes)
+        res=0
+        opened,locked=set(),set()
+        while q:
+            box =q.popleft()
+            if box in opened:
+                continue
+            if status[box]==1:
+                res+=candies[box]
+                opened.add(box)
+                for k in keys[box]:
+                    status[k]=1
+                    if k in locked:
+                        q.append(k)
+                        locked.remove(k)
+
+                for b in containedBoxes[box]:
+                    q.append(b)
+            else:
+                locked.add(box)
+        return res
