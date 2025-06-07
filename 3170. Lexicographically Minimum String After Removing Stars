@@ -1,0 +1,14 @@
+class Solution:
+    def clearStars(self, s: str) -> str:
+        heap=[]
+        n = len(s)
+        removed=[False]*n
+
+        for i in range(n):
+            if s[i]=="*":
+                v,idx=heappop(heap)
+                removed[i],removed[-idx]=True,True
+            
+            else:
+                heappush(heap,(s[i],-i))
+        return "".join([s[i] for i in range(n) if not removed[i]])
