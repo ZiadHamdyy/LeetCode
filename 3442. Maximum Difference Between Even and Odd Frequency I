@@ -1,0 +1,13 @@
+class Solution:
+    def maxDifference(self, s: str) -> int:
+        count = Counter(s)
+        odd = 0
+        even = 100
+        for v in count.values():
+            if v == 0:
+                continue
+            if v & 1:
+                odd = max(v, odd)
+            else:
+                even = min(v, even)
+        return odd - even
