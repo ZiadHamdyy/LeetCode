@@ -1,0 +1,10 @@
+class Solution:
+    def maxDiff(self, num: int) -> int:
+        s = str(num)
+        a = []
+        for i in set(s):
+            for j in range(10):
+                new = s.replace(i,str(j))
+                if new[0]!='0':
+                    a.append(new)
+        return int(max(a))-int(min(a))
