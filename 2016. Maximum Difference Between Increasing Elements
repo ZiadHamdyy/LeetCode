@@ -1,0 +1,9 @@
+class Solution:
+    def maximumDifference(self, nums: List[int]) -> int:
+        res = -1
+        n = len(nums)
+        for i in range(n):
+            for j in range(i, n):
+                if nums[i] < nums[j] and res < nums[j] - nums[i]:
+                    res = nums[j] - nums[i]
+        return res
