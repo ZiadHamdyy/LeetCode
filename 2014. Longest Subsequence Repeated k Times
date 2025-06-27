@@ -1,0 +1,15 @@
+class Solution:
+    def longestSubsequenceRepeatedK(self, s: str, k: int) -> str:
+        a = ""
+        c = sorted([ch for ch, cnt in Counter(s).items() if cnt >= k], reverse=True)
+        q = deque(c)
+        while q :
+            x = q.popleft()
+            if len(x) > len(a) :
+                a = x
+            for ch in c :
+                y = x+ch
+                it = iter(s)
+                if all(ch in it for ch in y * k):
+                    q.append(y)
+        return a  
