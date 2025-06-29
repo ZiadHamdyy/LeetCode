@@ -1,0 +1,16 @@
+class Solution:
+    def numSubseq(self, nums: List[int], target: int) -> int:
+        MOD = 10 ** 9 + 7
+        nums = [num for num in nums if num < target]
+        nums.sort()
+        n = len(nums)
+        l, r = 0, n - 1
+        res = 0
+        while l <= r:
+            if nums[l] + nums[r] > target:
+                r -= 1
+            else:
+                size = r - l
+                res = (res + pow(2, size, MOD)) % MOD
+                l += 1
+        return res
