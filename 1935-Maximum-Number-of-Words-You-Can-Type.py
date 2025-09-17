@@ -1,4 +1,11 @@
 class Solution:
     def canBeTypedWords(self, text: str, brokenLetters: str) -> int:
-        return sum(1 for w in text.split() if not any(c in brokenLetters for c in w))
-
+        broken=set(brokenLetters)
+        cnt, word=0, True
+        text+=' '
+        for c in text:
+            word&=(not (c in broken))
+            isspace=c==' '
+            cnt+=(word and isspace)
+            word|=isspace
+        return cnt
