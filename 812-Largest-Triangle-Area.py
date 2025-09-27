@@ -1,4 +1,6 @@
-ans = 0
+class Solution:
+    def largestTriangleArea(self, points: List[List[int]]) -> float:
+        ans = 0
         for x1, y1 in points:
             for x2, y2 in points:
                 for x3, y3 in points:
